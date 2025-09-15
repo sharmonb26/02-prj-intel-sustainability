@@ -1,1 +1,180 @@
 /* Add your CSS here */
+:root {
+  --intel-blue: #0071c5;
+  --intel-light-blue: #e6f1fa;
+  --intel-dark-blue: #003c71;
+  --intel-gray: #f5f5f5;
+  --intel-white: #ffffff;
+  --intel-shadow: 0 2px 8px rgba(0, 113, 197, 0.08);
+}
+
+/* Body background and font styles */
+body {
+  background: var(--intel-light-blue);
+  color: #222;
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* Header styles */
+header {
+  background: var(--intel-blue);
+  color: var(--intel-white);
+  padding: 56px 0 40px 0; /* Increased top and bottom padding for more height */
+  text-align: center;
+}
+
+header img {
+  width: 120px; /* Resize the logo */
+  margin-bottom: 12px;
+}
+
+header h1 {
+  margin: 12px 0 8px 0;
+  font-size: 2.2rem;
+  letter-spacing: 1px;
+}
+
+header p {
+  margin: 0 auto;
+  max-width: 500px;
+  font-size: 1.1rem;
+  color: #e6f1fa;
+}
+
+/* Timeline section spacing */
+section {
+  margin: 32px 0 16px 0;
+}
+
+/* Timeline container styles */
+.timeline {
+  display: flex;
+  flex-direction: row;
+  overflow-x: auto;
+  gap: 24px;
+  padding: 16px 24px;
+  scroll-snap-type: x mandatory; /* Enable horizontal scroll snapping */
+  scroll-behavior: smooth;       /* Smooth scrolling */
+}
+
+/* Each timeline card */
+.timeline-card {
+  min-width: 260px;
+  max-width: 320px;
+  min-height: 240px;
+  /* Use background image set by JS, don't override on hover */
+  background: var(--intel-white);
+  border-radius: 12px;
+  padding: 32px 18px 22px 18px;
+  box-shadow: var(--intel-shadow);
+  border: 2px solid var(--intel-blue);
+  flex-shrink: 0;
+  /* Only animate transform, box-shadow, and border-color */
+  transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+  position: relative;
+  scroll-snap-align: start;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: #fff;
+}
+
+/* Timeline card with background image */
+.timeline-card[data-img] {
+  /* This will be set by the inline style below */
+}
+
+/* Overlay for better text readability */
+.timeline-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 49, 113, 0.45);
+  border-radius: 12px;
+  z-index: 0;
+  pointer-events: none;
+  transition: background 0.3s;
+}
+
+/* Lighter overlay on hover so image is more visible */
+.timeline-card:hover::before {
+  background: rgba(0, 49, 113, 0.20);
+}
+
+/* Card headings */
+.timeline-card h2,
+.timeline-card h3 {
+  position: relative;
+  z-index: 1;
+  color: #fff;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.25);
+}
+
+.timeline-card h2 {
+  /* Only set margin and font, color handled above */
+  margin: 0 0 2px 0;
+  font-size: 1.3rem;
+  font-weight: bold;
+}
+
+.timeline-card h3 {
+  margin: 0 0 10px 0;
+  font-size: 1.1rem;
+}
+
+/* Hide details by default, show on hover */
+.timeline-details {
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  padding: 18px;
+  background: rgba(0, 49, 113, 0.85);
+  color: #fff;
+  border-radius: 0 0 12px 12px;
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+  transition: opacity 0.3s, max-height 0.3s;
+  z-index: 2;
+}
+
+/* Show details on hover */
+.timeline-card:hover .timeline-details {
+  opacity: 1;
+  max-height: 200px;
+}
+
+/* Add a simple hover effect */
+.timeline-card:hover {
+  transform: scale(1.04);
+  /* Don't override background image */
+  box-shadow: 0 4px 16px rgba(0, 113, 197, 0.15);
+  border-color: var(--intel-dark-blue);
+}
+
+/* Responsive: Stack cards vertically on small screens */
+@media (max-width: 700px) {
+  .timeline {
+    flex-direction: column;
+    overflow-x: visible;
+    gap: 16px;
+    padding: 8px 4px;
+  }
+  .timeline-card {
+    min-width: 0;
+    max-width: 100%;
+    width: 100%;
+    margin: 0 auto;
+  }
+}
+
+/* Timeline instruction text */
+body > p {
+  text-align: center;
+  color: var(--intel-dark-blue);
+  font-size: 1rem;
+  margin-bottom: 32px;
+}
+
+/* Set background image using data-img attribute (beginner-friendly JS below) */
